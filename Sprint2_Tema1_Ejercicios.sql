@@ -9,3 +9,8 @@ USE tienda;
 /*8*/ SELECT nombre, UPPER(SUBSTRING(nombre,1,2)) FROM fabricante;
 /*9*/ SELECT nombre, ROUND(precio,0) as "precio redondeado" FROM producto;
 /*10*/ SELECT nombre, FLOOR(precio) as "precio truncado" FROM producto;
+/*11*/ SELECT fabricante.codigo FROM fabricante INNER JOIN producto ON fabricante.codigo=producto.codigo_fabricante;
+/*12*/ SELECT fabricante.codigo FROM fabricante INNER JOIN producto ON fabricante.codigo=producto.codigo_fabricante GROUP BY fabricante.codigo;
+/*13*/ SELECT nombre FROM fabricante order by nombre ASC;
+/*14*/ SELECT nombre FROM fabricante order by nombre DESC;
+/*15*/ SELECT nombre,precio FROM producto ORDER BY nombre ASC, precio DESC;
