@@ -1,1 +1,11 @@
-SELECT * FROM tienda.fabricante;
+USE tienda;
+/*1*/ SELECT nombre FROM producto;
+/*2*/ SELECT nombre,precio FROM producto;
+/*3*/ SELECT * FROM producto;
+/*4*/ SELECT nombre,precio as euros ,(precio*1.1) as dólares FROM producto;
+/*5*/ SELECT nombre as "nombre de producto" ,precio as euros ,(precio*1.1) as "dólares estadounidenses" FROM producto;
+/*6*/ SELECT UPPER(nombre), precio FROM producto;
+/*7*/ SELECT LOWER(nombre), precio FROM producto;
+/*8*/ SELECT nombre, UPPER(SUBSTRING(nombre,1,2)) FROM fabricante;
+/*9*/ SELECT nombre, ROUND(precio,0) as "precio redondeado" FROM producto;
+/*10*/ SELECT nombre, FLOOR(precio) as "precio truncado" FROM producto;
