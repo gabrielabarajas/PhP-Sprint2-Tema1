@@ -22,10 +22,21 @@ USE tienda;
 /*21*/ SELECT producto.nombre  as producto, precio, fabricante.nombre as fabricante FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante;
 /*22*/ SELECT producto.nombre  as producto, precio, fabricante.nombre as fabricante FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante order by fabricante.nombre ASC;
 /*23*/ SELECT producto.codigo as "código producto", producto.nombre as "nombre producto", fabricante.codigo as "código fabricante", fabricante.nombre as "nombre fabricante"FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante;
-/*24*/
-/*25*/
-/*26*/
-/*27*/
-/*28*/
-/*29*/
-/*30*/
+/*24*/ SELECT producto.nombre as "nombre producto", precio,fabricante.nombre as "nombre fabricante" FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante order by precio ASC LIMIT 0,1;
+/*25*/ SELECT producto.nombre as "nombre producto", precio,fabricante.nombre as "nombre fabricante" FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante order by precio DESC LIMIT 0,1;
+/*26*/ SELECT producto.codigo, producto.nombre as "nombre producto", fabricante.nombre as "nombre fabricante" FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante WHERE fabricante.nombre="Lenovo";
+/*27*/ SELECT producto.codigo, producto.nombre as "nombre producto", fabricante.nombre as "nombre fabricante" FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante WHERE fabricante.nombre="Crucial" AND producto.precio > 200;
+/*28*/ SELECT producto.codigo, producto.nombre as "nombre producto", fabricante.nombre as "nombre fabricante" FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante WHERE fabricante.nombre="Asus" OR fabricante.nombre="Hewlett-Packard" OR fabricante.nombre="Seagate"; 
+/*29*/ SELECT producto.codigo, producto.nombre as "nombre producto", fabricante.nombre as "nombre fabricante" FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante WHERE fabricante.nombre IN ("Asus", "Hewlett-Packard", "Seagate"); 
+/*30*/ SELECT producto.nombre as "nombre producto", producto.precio FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante WHERE fabricante.nombre like "%e";
+/*31*/ SELECT producto.nombre as "nombre producto", producto.precio FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante WHERE fabricante.nombre like "%w%";
+/*32*/ SELECT producto.nombre, producto.precio, fabricante.nombre FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante WHERE producto.precio >= 180 ORDER BY producto.precio DESC, producto.nombre ASC; 
+/*33*/ SELECT DISTINCT fabricante.codigo, fabricante.nombre FROM fabricante INNER JOIN producto ON fabricante.codigo=producto.codigo_fabricante;
+/*34*/ SELECT fabricante.nombre as fabricante , producto.nombre as producto FROM fabricante LEFT JOIN producto ON fabricante.codigo=producto.codigo_fabricante;
+/*35*/ SELECT fabricante.nombre as fabricante , producto.nombre as producto FROM fabricante LEFT JOIN producto ON fabricante.codigo=producto.codigo_fabricante WHERE producto.nombre IS NULL;
+/*36*/ SELECT producto.nombre FROM fabricante,producto WHERE fabricante.codigo=producto.codigo_fabricante AND fabricante.nombre = "LENOVO";
+/*37*/ SELECT * FROM producto, fabricante WHERE fabricante.codigo=producto.codigo_fabricante AND producto.precio = (SELECT MAX(producto.precio) WHERE fabricante.nombre= "Lenovo");
+/*38*/ SELECT MAX(producto.precio),producto.nombre FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante AND fabricante.nombre = "LENOVO";
+/*39*/ SELECT MIN(producto.precio),producto.nombre FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante AND fabricante.nombre = "Hewlett-Packard";
+/*40*/ SELECT * FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante WHERE producto.precio >= (SELECT MAX(producto.precio) AND fabricante.nombre= "Lenovo");
+/*41*/
