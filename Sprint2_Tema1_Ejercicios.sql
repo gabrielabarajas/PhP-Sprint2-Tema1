@@ -1,4 +1,6 @@
 USE tienda;
+USE universidad;
+
 /*1*/ SELECT nombre FROM producto;
 /*2*/ SELECT nombre,precio FROM producto;
 /*3*/ SELECT * FROM producto;
@@ -36,7 +38,18 @@ USE tienda;
 /*35*/ SELECT fabricante.nombre as fabricante , producto.nombre as producto FROM fabricante LEFT JOIN producto ON fabricante.codigo=producto.codigo_fabricante WHERE producto.nombre IS NULL;
 /*36*/ SELECT producto.nombre FROM fabricante,producto WHERE fabricante.codigo=producto.codigo_fabricante AND fabricante.nombre = "LENOVO";
 /*37*/ SELECT * FROM producto, fabricante WHERE fabricante.codigo=producto.codigo_fabricante AND producto.precio = (SELECT MAX(producto.precio) WHERE fabricante.nombre= "Lenovo");
-/*38*/ SELECT MAX(producto.precio),producto.nombre FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante AND fabricante.nombre = "LENOVO";
+/*38*/ SELECT producto.nombre, producto.precio FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante WHERE producto.precio=(SELECT MAX(producto.precio));
 /*39*/ SELECT MIN(producto.precio),producto.nombre FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante AND fabricante.nombre = "Hewlett-Packard";
 /*40*/ SELECT * FROM producto INNER JOIN fabricante ON fabricante.codigo=producto.codigo_fabricante WHERE producto.precio >= (SELECT MAX(producto.precio) AND fabricante.nombre= "Lenovo");
 /*41*/
+
+/*UNIVERSIDAD*/
+/*1*/ SELECT persona.apellido1, persona.apellido2, persona.nombre FROM universidad.persona WHERE persona.tipo='alumno' ORDER BY apellido1 ASC, apellido2 ASC, persona.nombre ASC;
+/*2*/ SELECT persona.nombre, persona.apellido1, persona.apellido2 FROM universidad.persona WHERE persona.tipo='alumno' AND persona.telefono is null;
+/*3*/ SELECT persona.nombre, persona.apellido1, persona.apellido2 FROM universidad.persona WHERE persona.tipo='alumno' AND persona.fecha_nacimiento BETWEEN '1999-01-01' AND '1999-12-31';
+/*4*/ SELECT persona.nombre, persona.apellido1, persona.apellido2 FROM universidad.persona WHERE persona.tipo='profesor' AND persona.telefono is null AND persona.nif LIKE '%K';
+/*5*/ SELECT * FROM universidad.asignatura WHERE asignatura.cuatrimestre=1 AND asignatura.curso=3 AND asignatura.id_grado=7;
+/*6*/ SELECT PE.apellido1, PE.apellido2, PE.nombre, DE.nombre FROM persona PE JOIN profesor PR ON  PE.id=PR.id_profesor JOIN departamento DE ON PR.id_departamento=DE.id;
+/*7*/ SELECT A.nombre ,CE.anyo_inicio, CE.anyo_fin FROM asignatura A JOIN alumno_se_matricula_asignatura AM ON AM.id_asignatura=A.id JOIN curso_escolar CE ON CE.id=AM.id_curso_escolar JOIN persona PE ON PE.id=AM.id_alumno WHERE PE.nif='26902806M'; 
+/*8*/ SELECT DISTINCT DE.nombre departamento FROM departamento DE JOIN profesor PE ON PE.id_departamento = DE.id JOIN asignatura AG ON AG.id_profesor = PE.id_profesor JOIN grado GR ON GR.id=AG.id_grado WHERE GR.nombre='Grado en Ingeniería Informática (Plan 2015)';
+/*9*/ SELECT * FROM persona PE JOIN alumno_se_matricula_asignatura ASM ON PE.id=ASM.id_alumno JOIN curso_escolar CE ON ASM.id_curso_escolar=CE.id WHERE CE.anyo_inicio=2018 AND CE.anyo_fin=2019; 
