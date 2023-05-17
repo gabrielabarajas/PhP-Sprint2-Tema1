@@ -71,4 +71,11 @@ USE universidad;
 /*3*/ SELECT departamento.nombre departamento,COUNT(profesor.id_profesor) cantidad_profesores FROM departamento JOIN profesor ON departamento.id=profesor.id_departamento group by departamento.nombre ORDER BY cantidad_profesores DESC;
 /*4*/ SELECT departamento.nombre departamento,COUNT(profesor.id_profesor) cantidad_profesores FROM departamento LEFT JOIN profesor ON departamento.id=profesor.id_departamento group by departamento.nombre;
 /*5*/ SELECT grado.nombre grado,COUNT(asignatura.id_grado) cantidad_asignaturas FROM grado LEFT JOIN asignatura ON grado.id=asignatura.id_grado GROUP BY grado.nombre ORDER BY cantidad_asignaturas DESC;
-/*5*/ SELECT grado.nombre grado,COUNT(asignatura.id_grado) cantidad_asignaturas FROM grado LEFT JOIN asignatura ON grado.id=asignatura.id_grado WHERE COUNT(asignatura.id_grado)>40 GROUP BY grado.nombre;
+/*6*/ SELECT grado.nombre grado,COUNT(asignatura.id_grado>40) FROM grado LEFT JOIN asignatura ON grado.id=asignatura.id_grado GROUP BY asignatura.id_grado;
+/*7*/ SELECT DISTINCT grado.nombre,asignatura.tipo,SUM(asignatura.creditos) creditos FROM grado JOIN asignatura ON grado.id = asignatura.id_grado GROUP BY asignatura.nombre ;
+/*8*/ SELECT curso_escolar.anyo_inicio ,COUNT(alumno_se_matricula_asignatura.id_curso_escolar) FROM alumno_se_matricula_asignatura ASMA JOIN curso_escolar CE ON ASMA.id_curso_escolar = CE.id;
+/*9*/
+/*10*/ SELECT * FROM persona WHERE persona.fecha_nacimiento = (SELECT MIN(persona.fecha_nacimiento) FROM persona) AND persona.tipo = (SELECT persona.tipo FROM persona WHERE persona.tipo='alumno');
+/*11*/
+
+
